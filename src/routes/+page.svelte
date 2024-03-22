@@ -1,7 +1,7 @@
 <script>
 	import CounterInline from '../components/CounterInline.svelte';
 	import NTT from '../components/NTT.svelte';
-	import cat_thumb_up from '$lib/images/cat_thumb_up_1.png';
+	import cat_thumb_up from '$lib/images/cat_thumb_up_1.webp';
 	import Testimonials from './Testimonials.svelte';
 </script>
 
