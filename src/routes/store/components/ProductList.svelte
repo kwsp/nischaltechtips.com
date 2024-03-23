@@ -1,6 +1,6 @@
 <script>
 	import NTT from '../../../components/NTT.svelte';
-	import ntt_shirt_image from '$lib/images/ntt_shirt/ntt_shirt_2.png';
+	import ntt_shirt_image from '$lib/images/ntt_shirt/ntt_shirt_2.webp';
 	import ntt_hopium from '$lib/images/products/ntt_hopium2.webp';
 	import screwdriver from '$lib/images/products/ntt_screwdriver.webp';
 
