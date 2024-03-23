@@ -1,5 +1,6 @@
 <script>
 	import thank_you from '$lib/files/thankyou_for_choosing-NTT.pdf';
+	import NTT from '../../components/NTT.svelte';
 </script>
 
 <svelte:head>
@@ -8,7 +9,7 @@
 </svelte:head>
 
 <div class="text-column">
-	<h1>About Nischal Tech Tips</h1>
+	<h1>About <NTT /></h1>
 
 	<p><a href={thank_you}>Thank you for choosing Nischal Tech Tips!</a></p>
 </div>

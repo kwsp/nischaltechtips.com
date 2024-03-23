@@ -11,7 +11,11 @@
 </svelte:head>
 
 <section>
-	<h1>Welcome to <NTT /></h1>
+	<div>
+		<h1>
+			Welcome to <NTT />
+		</h1>
+	</div>
 
 	<p>
 		Welcome to <NTT />, the one-stop digital emporium where high tech meets high jinx, and where we
@@ -72,10 +76,6 @@
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
 	}
 
 	.text-wrap {
