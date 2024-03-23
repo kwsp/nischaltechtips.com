@@ -64,10 +64,6 @@
 		--background: var(--color-background-1);
 	}
 
-	path {
-		fill: var(--background);
-	}
-
 	ul {
 		position: relative;
 		padding: 0;
