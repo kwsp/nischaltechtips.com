@@ -14,7 +14,7 @@
 	<h1>Welcome to <NTT /></h1>
 
 	<p>
-		Welcome to <NTT />, the one-stop digital emporium where high tech meets high jinks, and where we
+		Welcome to <NTT />, the one-stop digital emporium where high tech meets high jinx, and where we
 		believe that the only thing better than a good gadget is a good laugh!
 	</p>
 
