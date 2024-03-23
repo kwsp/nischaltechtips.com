@@ -6,8 +6,8 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Nischal Tech Tips</title>
+	<meta name="description" content="Nischal Tech Tips Home" />
 </svelte:head>
 
 <section>
