@@ -19,7 +19,9 @@
 	</p>
 
 	<div class="text-wrap">
-		<img src={cat_thumb_up} width="150" alt="Cat thumb up" />
+		<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+			<img src={cat_thumb_up} width="150" alt="Cat thumb up" />
+		</a>
 		<p>
 			Are you tired of tech reviews that sound like they were written by a malfunctioning robot? Do
 			you crave a sprinkle of pizzazz with your processor specs? Look no further, dear netizen!
