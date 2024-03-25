@@ -67,13 +67,26 @@
 
 	<hr />
 	{#each reviews as review}
-		<a href={`/review/${review.id}`}>
-			<h2>
-				<span class="review-title-product"><strong>{review.product}</strong></span>:
-				<span class="review-title"><i>{review.title}</i></span>
-			</h2>
-			<p>{review.review}</p>
-		</a>
+		<!-- <a href={`/review/${review.id}`}>
+		<h2>
+			<span class="review-title-product"><strong>{review.product}</strong></span>:
+			<span class="review-title"><i>{review.title}</i></span>
+		</h2>
+		<p>{review.review}</p>
+		</a> -->
+
+		<ToggleConfetti>
+			<button slot="label">
+				<h2>
+					<span class="review-title-product"><strong>{review.product}</strong></span>:
+					<span class="review-title"><i>{review.title}</i></span>
+				</h2>
+				<p>{review.review}</p>
+			</button>
+
+			<Confetti y={[0.25, 0.5]} x={[-4, 4]} />
+		</ToggleConfetti>
+
 		<hr />
 	{/each}
 </div>
