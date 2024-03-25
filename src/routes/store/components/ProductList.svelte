@@ -1,10 +1,9 @@
 <script>
-	import NTT from '../../../components/NTT.svelte';
 	import ntt_shirt_image from '$lib/images/ntt_shirt/ntt_shirt_2.webp';
 	import ntt_hopium from '$lib/images/products/ntt_hopium2.webp';
 	import screwdriver from '$lib/images/products/ntt_screwdriver.webp';
 
-	let products = [
+	const products = [
 		{
 			name: 'NTT T-shirt',
 			description:
@@ -31,11 +30,6 @@
 	];
 </script>
 
-<div class="store-title">
-	<NTT />
-	<span> STORE</span>
-</div>
-
 <div class="product-list">
 	{#each products as product}
 		<div class="product">
@@ -47,9 +41,6 @@
 					<div class="sold-out">Sold out</div>
 				{/if}
 			</div>
-			<!-- <div style="height:0;width:20%;padding-bottom:20%;background-color:red">
-        <div>Content goes here</div>
-      </div> -->
 			<div class="product-info">
 				<h2>{product.name}</h2>
 				<p class="price">${product.price} USD</p>
@@ -61,12 +52,6 @@
 </div>
 
 <style>
-	.store-title {
-		margin: 2rem;
-		font-weight: 700;
-		font-size: 1.4rem;
-	}
-
 	.product-list {
 		display: flex;
 		flex-wrap: wrap;

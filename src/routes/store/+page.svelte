@@ -1,5 +1,6 @@
 <script>
 	import ProductList from './components/ProductList.svelte';
+	import NTT from '../../components/NTT.svelte';
 </script>
 
 <svelte:head>
@@ -7,4 +8,10 @@
 	<meta name="description" content="NTT Store" />
 </svelte:head>
 
-<ProductList />
+<section>
+	<h1>
+		<NTT /> STORE
+	</h1>
+
+	<ProductList />
+</section>
