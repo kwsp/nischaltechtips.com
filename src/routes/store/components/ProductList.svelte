@@ -7,7 +7,7 @@
 		{
 			name: 'NTT T-shirt',
 			description:
-				"Step into the world of tech fashion where the binary meets the binary stars with the exclusive Nischal Tech Tips T-Shirt! This isn't jusdit any piece of clothing; it's the Swiss Army Knife of T-shirts. Wearing it won’t just make you the most stylish geek in the room, it’ll also bump your tech cred up several notches.",
+				"Step into the world of tech fashion where the binary meets the binary stars with the exclusive Nischal Tech Tips T-Shirt! This isn't just any piece of clothing; it's the Swiss Army Knife of T-shirts. Wearing it won’t just make you the most stylish geek in the room, it’ll also bump your tech cred up several notches.",
 			price: '19.99',
 			imageUrl: ntt_shirt_image,
 			soldOut: false
