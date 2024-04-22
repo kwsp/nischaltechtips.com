@@ -110,7 +110,7 @@
 
 	.product-info .price {
 		font-weight: bold;
-		color: #e53935; /* Price color */
+		color: var(--color-emphasis2); /* Price color */
 		margin-bottom: 8px;
 	}
 
@@ -118,7 +118,7 @@
 		position: absolute;
 		top: 16px;
 		left: 16px;
-		background: #ff4136;
+		background: var(--color-emphasis2);
 		color: white;
 		padding: 4px 8px;
 		border-radius: 4rem;
