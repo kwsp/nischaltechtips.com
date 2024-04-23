@@ -1,6 +1,7 @@
 <script>
 	import thank_you from '$lib/files/thankyou_for_choosing-NTT.pdf';
 	import NTT from '../../components/NTT.svelte';
+	import Cartridge from '../../components/Cartridge.svelte';
 
 	import prof_khanal from '$lib/images/prof_khanal.webp';
 	import nischal_happi from '$lib/images/jinx/nischal_happi.webp';
@@ -50,6 +51,8 @@
 		</p>
 	</div>
 
+	<Cartridge />
+
 	<img class="wide-img" src={prof_khanal} alt="Prof. Khanal's invite to be a keynote speaker" />
 </div>
 
@@ -58,6 +61,7 @@
 		display: flex;
 		justify-content: center;
 		text-align: center;
+		align-items: center;
 	}
 
 	.text-wrap {
