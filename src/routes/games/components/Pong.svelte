@@ -199,9 +199,9 @@
 
 	onMount(() => {
 		context = canvas.getContext('2d');
+
 		canvas.addEventListener('mousedown', handleMouseClick);
 		canvas.addEventListener('mousemove', handleMouseMove);
-
 		canvas.addEventListener('touchstart', handleTouchstart);
 		canvas.addEventListener('touchmove', handleTouchmove);
 		canvas.addEventListener('touchend', handleTouchend);
@@ -224,6 +224,12 @@
 		}, 1000 / FRAMES_PER_SECOND);
 
 		return () => {
+			canvas.removeEventListener('mousedown', handleMouseClick);
+			canvas.removeEventListener('mousemove', handleMouseMove);
+			canvas.removeEventListener('touchstart', handleTouchstart);
+			canvas.removeEventListener('touchmove', handleTouchmove);
+			canvas.removeEventListener('touchend', handleTouchend);
+
 			clearInterval(clear);
 		};
 	});
