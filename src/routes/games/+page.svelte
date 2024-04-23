@@ -1,4 +1,5 @@
 <script>
+	import MediaQuery from '../../components/MediaQuery.svelte';
 	import NTT from '../../components/NTT.svelte';
 	import Pong from './components/pong.svelte';
 	import jinx_judge from '$lib/images/jinx/jinx_judge.webp';
@@ -20,10 +21,22 @@
 		</a>
 	</div>
 
-	<Pong width={600} height={450} />
+	<MediaQuery query="(max-width: 768px)" let:matches>
+		{#if matches}
+			<!-- mobile -->
+			<Pong width={350} height={280} />
+		{:else}
+			<Pong width={600} height={450} />
+		{/if}
+	</MediaQuery>
 </section>
 
 <style>
+	h1 {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
 	.container {
 		display: flex;
 		justify-content: center;

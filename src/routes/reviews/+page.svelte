@@ -24,6 +24,10 @@
 </section>
 
 <style>
+	h1 {
+		margin-bottom: 0;
+	}
+
 	.container {
 		display: flex;
 		justify-content: center;

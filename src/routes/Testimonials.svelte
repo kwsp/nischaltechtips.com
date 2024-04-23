@@ -53,4 +53,8 @@
 		flex-direction: column;
 		width: 100%;
 	}
+
+	h1 {
+		margin-bottom: 0;
+	}
 </style>

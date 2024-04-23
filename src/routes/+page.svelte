@@ -18,7 +18,7 @@
 		<h1>
 			Welcome to <NTT />
 
-			<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+			<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="jinx-roll">
 				<img src={jinx_6} width="100" class="float-right" alt="Jinx 11" loading="lazy" />
 			</a>
 		</h1>
@@ -35,7 +35,7 @@
 			<img src={cat_thumb_up} width="150" alt="Cat thumb up" loading="lazy" />
 		</a>
 
-		<p>
+		<p style="margin-top: 0;">
 			Are you tired of tech reviews that sound like they were written by a malfunctioning robot? Do
 			you crave a sprinkle of pizzazz with your processor specs? Look no further, dear netizen!
 			Nischal Tech Tips has you covered with the kind of tech-savvy wizardry and sparkling wit that
@@ -76,6 +76,10 @@
 <Testimonials />
 
 <style>
+	h1 {
+		margin-top: 0;
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
@@ -91,10 +95,14 @@
 
 	.text-wrap img {
 		float: left; /* Use 'right' to float the image to the right */
-		margin-right: 20px; /* Adds some space between the text and the image */
-		margin-bottom: 10px; /* Space below the image */
 	}
 	.text-wrap img .float-right {
 		float: left; /* Use 'right' to float the image to the right */
+	}
+
+	@media (max-width: 767px) {
+		.jinx-roll {
+			display: none;
+		}
 	}
 </style>

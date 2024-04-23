@@ -2,6 +2,8 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/NTT_logo_notext.svg';
 	import github from '$lib/images/github.svg';
+
+	let isOpen = false; // State to manage the menu visibility
 </script>
 
 <header>
@@ -12,7 +14,8 @@
 	</div>
 
 	<nav>
-		<ul>
+		<button class="toggle-button" on:click={() => (isOpen = !isOpen)}> Menu </button>
+		<ul class={isOpen ? 'open' : ''}>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
@@ -65,30 +68,30 @@
 	}
 
 	nav {
+		width: 100%;
 		display: flex;
+		overflow: scroll;
 		justify-content: center;
-		--background: var(--color-background-1);
 	}
 
-	ul {
+	nav ul {
 		position: relative;
 		padding: 0;
 		margin: 0;
 		height: 3em;
-		display: flex;
+		display: flex; /* Always show the menu in a flex layout on non-mobile screens */
 		justify-content: center;
 		align-items: center;
 		list-style: none;
-		background: var(--background);
 		background-size: contain;
 	}
 
-	li {
+	nav li {
 		position: relative;
 		height: 100%;
 	}
 
-	li[aria-current='page']::before {
+	nav li[aria-current='page']::before {
 		--size: 6px;
 		content: '';
 		width: 0;
@@ -112,6 +115,10 @@
 		letter-spacing: 0.1em;
 		text-decoration: none;
 		transition: color 0.2s linear;
+	}
+
+	.toggle-button {
+		display: none;
 	}
 
 	a:hover {

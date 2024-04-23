@@ -13,11 +13,11 @@
 
 <section>
 	<h1>
-		<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="jinxRoll" target="_blank">
+		<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="jinx-roll" target="_blank">
 			<img src={jinx_11} width="70" alt="Jinx jinx" loading="lazy" />
 		</a>
 		<NTT /> STORE
-		<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="jinxRoll" target="_blank">
+		<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="jinx-roll" target="_blank">
 			<img src={jinx_7} width="100" alt="Jinx jinx" loading="lazy" />
 		</a>
 	</h1>
@@ -27,13 +27,11 @@
 
 <style>
 	h1 {
-		align-items: center;
-		text-align: center;
-		vertical-align: center;
-		justify-content: center;
+		margin-top: 0;
 	}
+
 	@media (max-width: 767px) {
-		.jinxRoll {
+		.jinx-roll {
 			display: none;
 		}
 	}

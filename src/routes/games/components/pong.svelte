@@ -5,23 +5,26 @@
 	const FRAMES_PER_SECOND = 60;
 	const FRAME_RATE_ADJUST = 30 / FRAMES_PER_SECOND;
 
-	const PADDLE_THICKNESS = 10;
-	const PADDLE_HEIGHT = 100;
-	const COMPUTER_MOVE_SPEED = 8 * FRAME_RATE_ADJUST;
-
 	let canvas: HTMLCanvasElement, context: CanvasRenderingContext2D;
 	export let width = 800;
 	export let height = 600;
 	export let winning_score = 6;
 
+	// Const values adjusted from width and height
+	let PADDLE_THICKNESS = Math.round(0.0125 * width);
+	let PADDLE_HEIGHT = Math.round(height / 6);
+	let ballSpeedX = Math.round((10 * FRAME_RATE_ADJUST * width) / 800);
+	let ballSpeedY = Math.round((4 * FRAME_RATE_ADJUST * height) / 600);
+	let ballRadius = Math.round((10 * width) / 800);
+	let COMPUTER_MOVE_SPEED = Math.round((8 * FRAME_RATE_ADJUST * width) / 800);
+
+	// variables updated in game
 	let ballX = 100;
 	let ballY = 100;
-	let ballSpeedX = 10 * FRAME_RATE_ADJUST;
-	let ballSpeedY = 4 * FRAME_RATE_ADJUST;
 	let player1Score = 0;
 	let player2Score = 0;
-	let paddle1Y = 250;
-	let paddle2Y = 250;
+	let paddle1Y = Math.round(0.4 * height);
+	let paddle2Y = Math.round(0.4 * height);
 	let showingWinScreen = false;
 
 	function handleMouseClick(evt: MouseEvent) {
@@ -114,20 +117,33 @@
 		}
 	}
 
+	function textCenter(
+		context: CanvasRenderingContext2D,
+		text: string,
+		halfWidth: number,
+		y: number
+	) {
+		const measurement = context.measureText(text);
+		context.fillText(text, halfWidth - measurement.width * 0.5, y);
+	}
+
 	function drawEverything() {
 		// blanks out the screen with black
 		colorRect(0, 0, canvas.width, canvas.height, 'black');
+
+		const halfHeight = height / 2;
+		const halfWidth = width / 2;
 
 		if (showingWinScreen) {
 			context.fillStyle = 'white';
 
 			if (player1Score >= winning_score) {
-				context.fillText('Left Player Won', width / 2 - 25, height / 2);
+				textCenter(context, 'You Won!!!', halfWidth, halfHeight);
 			} else if (player2Score >= winning_score) {
-				context.fillText('Right Player Won', width / 2 - 25, height / 2);
+				textCenter(context, 'You Lost!!!', halfWidth, halfHeight);
 			}
 
-			context.fillText('click to continue', 350, 500);
+			textCenter(context, 'Click to continue', halfWidth, height * 0.75);
 			return;
 		}
 
@@ -140,13 +156,11 @@
 		colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 
 		// next line draws the ball
-		colorCircle(ballX, ballY, 10, 'white');
+		colorCircle(ballX, ballY, ballRadius, 'white');
 
 		context.font = '20px Arial';
-		context.fillText(player1Score, 100, 100);
-		context.fillText(player2Score, canvas.width - 100, 100);
-
-		context.fillText('NTT Pong', 20, 20);
+		context.fillText(player1Score, width * 0.25, halfHeight);
+		context.fillText(player2Score, width * 0.75, halfHeight);
 	}
 
 	function colorCircle(centerX, centerY, radius, drawColor) {
@@ -180,6 +194,7 @@
 				Math.round((totalFramesRendered / ((new Date().getTime() - startTime) / 1000)) * 10) / 10.0;
 			context.font = '10px Arial';
 			context.fillText(avgFrameRate + 'fps', canvas.width - 50, 10);
+			context.fillText('NTT Pong', 20, 10);
 		}, 1000 / FRAMES_PER_SECOND);
 
 		return () => {

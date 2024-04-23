@@ -50,7 +50,7 @@
 		</p>
 	</div>
 
-	<img src={prof_khanal} alt="Prof. Khanal's invite to be a keynote speaker" />
+	<img class="wide-img" src={prof_khanal} alt="Prof. Khanal's invite to be a keynote speaker" />
 </div>
 
 <style>
@@ -59,13 +59,16 @@
 		justify-content: center;
 		text-align: center;
 	}
+
 	.text-wrap {
 		text-align: justify;
-		overflow: hidden; /* Clears the float */
+		max-width: 100%;
 	}
+
 	.text-wrap img {
 		float: left; /* Use 'right' to float the image to the right */
-		margin-right: 20px; /* Adds some space between the text and the image */
-		margin-bottom: 10px; /* Space below the image */
+	}
+	.wide-img {
+		max-width: 100%;
 	}
 </style>

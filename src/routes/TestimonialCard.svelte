@@ -4,7 +4,7 @@
 	export let customerName = '';
 	export let customerTitle = '';
 
-	import ImageClickLarge from './ImageClickLarge.svelte';
+	import ImageClickLarge from '../components/ImageClickLarge.svelte';
 
 	let isOverlayVisible = false;
 	function toggleOverlay() {
