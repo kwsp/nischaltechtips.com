@@ -1,5 +1,5 @@
 <script>
-	import thank_you from '$lib/files/thankyou_for_choosing-NTT.pdf';
+	import thank_you from '$lib/files/Thank_you_for_choosing_NTT.pdf';
 	import NTT from '../../components/NTT.svelte';
 	import Cartridge from '../../components/Cartridge.svelte';
 
