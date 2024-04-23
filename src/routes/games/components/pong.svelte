@@ -39,6 +39,28 @@
 		paddle1Y = evt.offsetY - PADDLE_HEIGHT / 2;
 	}
 
+	function handleTouchstart(evt: TouchEvent) {
+		if (showingWinScreen) {
+			player1Score = 0;
+			player2Score = 0;
+			showingWinScreen = false;
+		}
+		evt.preventDefault(); // Prevents additional mouse events
+	}
+
+	function handleTouchmove(evt: TouchEvent) {
+		evt.preventDefault(); // Prevents additional mouse events
+		const touch = evt.touches[0];
+		const rect = canvas.getBoundingClientRect();
+		const offsetY = touch.clientY - rect.top;
+		// const offsetX = touch.clientX - rect.left;
+		paddle1Y = offsetY - PADDLE_HEIGHT / 2;
+	}
+
+	function handleTouchend(evt: TouchEvent) {
+		evt.preventDefault(); // Prevents additional mouse events
+	}
+
 	/**
 	 * Restart the ball from the center of the screen
 	 */
@@ -179,6 +201,10 @@
 		context = canvas.getContext('2d');
 		canvas.addEventListener('mousedown', handleMouseClick);
 		canvas.addEventListener('mousemove', handleMouseMove);
+
+		canvas.addEventListener('touchstart', handleTouchstart);
+		canvas.addEventListener('touchmove', handleTouchmove);
+		canvas.addEventListener('touchend', handleTouchend);
 
 		// analytics
 		let startTime = new Date().getTime();
