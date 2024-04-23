@@ -1,9 +1,16 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import logo from '$lib/images/NTT_logo_notext.svg';
 	import github from '$lib/images/github.svg';
 
 	let isOpen = false; // State to manage the menu visibility
+
+	const isCurrent = (pathname: string, slug: string) => {
+		if (slug.length === 0) {
+			return pathname === '/';
+		}
+		return pathname.startsWith(`/${slug}`);
+	};
 
 	const navData = [
 		{ slug: '', title: 'Home' },
@@ -25,7 +32,8 @@
 		<button class="toggle-button" on:click={() => (isOpen = !isOpen)}> Menu </button>
 		<ul class={isOpen ? 'open' : ''}>
 			{#each navData as section}
-				<li aria-current={$page.url.pathname === '/' + section.slug ? 'page' : undefined}>
+				<!-- <li aria-current={$page.url.pathname === `/${section.slug}` ? 'page' : undefined}> -->
+				<li aria-current={isCurrent($page.url.pathname, section.slug) ? 'page' : undefined}>
 					<a href="/{section.slug}">{section.title}</a>
 				</li>
 			{/each}
