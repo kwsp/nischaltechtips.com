@@ -46,6 +46,10 @@
 			showingWinScreen = false;
 		}
 		evt.preventDefault(); // Prevents additional mouse events
+		const touch = evt.touches[0];
+		const rect = canvas.getBoundingClientRect();
+		const offsetY = touch.clientY - rect.top;
+		paddle1Y = offsetY - PADDLE_HEIGHT / 2;
 	}
 
 	function handleTouchmove(evt: TouchEvent) {
@@ -53,7 +57,6 @@
 		const touch = evt.touches[0];
 		const rect = canvas.getBoundingClientRect();
 		const offsetY = touch.clientY - rect.top;
-		// const offsetX = touch.clientX - rect.left;
 		paddle1Y = offsetY - PADDLE_HEIGHT / 2;
 	}
 
