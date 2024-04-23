@@ -1,7 +1,6 @@
 <script>
-	import Header from './Header.svelte';
 	import './styles.css';
-
+	import Header from './Header.svelte';
 	import logo from '$lib/images/NTT_logo_notext.svg';
 </script>
 

@@ -1,8 +1,9 @@
 <script>
 	import MediaQuery from '../../components/MediaQuery.svelte';
 	import NTT from '../../components/NTT.svelte';
-	import Pong from './components/pong.svelte';
 	import jinx_judge from '$lib/images/jinx/jinx_judge.webp';
+
+	import Pong from './components/pong.svelte';
 </script>
 
 <svelte:head>
@@ -20,6 +21,10 @@
 			<img src={jinx_judge} width="200" alt="Cat puter" loading="lazy" />
 		</a>
 	</div>
+
+	<ul>
+		<li><a href="/games/gameboy">Gameboy</a></li>
+	</ul>
 
 	<MediaQuery query="(max-width: 768px)" let:matches>
 		{#if matches}

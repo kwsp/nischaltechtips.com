@@ -4,6 +4,14 @@
 	import github from '$lib/images/github.svg';
 
 	let isOpen = false; // State to manage the menu visibility
+
+	const navData = [
+		{ slug: '', title: 'Home' },
+		{ slug: 'store', title: 'Store' },
+		{ slug: 'reviews', title: 'Reviews' },
+		{ slug: 'games', title: 'Games' },
+		{ slug: 'about', title: 'About' }
+	];
 </script>
 
 <header>
@@ -16,21 +24,11 @@
 	<nav>
 		<button class="toggle-button" on:click={() => (isOpen = !isOpen)}> Menu </button>
 		<ul class={isOpen ? 'open' : ''}>
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Home</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/store' ? 'page' : undefined}>
-				<a href="/store">Store</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/reviews' ? 'page' : undefined}>
-				<a href="/reviews">Reviews</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/games' ? 'page' : undefined}>
-				<a href="/games">Games</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">About</a>
-			</li>
+			{#each navData as section}
+				<li aria-current={$page.url.pathname === '/' + section.slug ? 'page' : undefined}>
+					<a href="/{section.slug}">{section.title}</a>
+				</li>
+			{/each}
 		</ul>
 	</nav>
 
