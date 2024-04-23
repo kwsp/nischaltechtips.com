@@ -3,6 +3,7 @@
 	import NTT from '../components/NTT.svelte';
 	import Testimonials from './Testimonials.svelte';
 	import Laptop from '../components/laptop.svelte';
+	import AshAndPikachu from '../components/AshAndPikachu.svelte';
 
 	import cat_thumb_up from '$lib/images/cat_thumb_up_1.webp';
 	import jinx_6 from '$lib/images/jinx/jinx_6.webp';
@@ -68,12 +69,15 @@
 			Click me:
 			<CounterInline />
 		</div>
-
-		<p>pssss go buy the <a href="/store">NTT T-shirt!</a></p>
 	</div>
+
+	<p>pssss go buy the <a href="/store">NTT T-shirt!</a></p>
+	<AshAndPikachu />
 </section>
 
-<Testimonials />
+<section>
+	<Testimonials />
+</section>
 
 <style>
 	h1 {
