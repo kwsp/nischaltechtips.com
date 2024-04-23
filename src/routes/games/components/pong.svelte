@@ -158,7 +158,7 @@
 		// next line draws the ball
 		colorCircle(ballX, ballY, ballRadius, 'white');
 
-		context.font = '20px Arial';
+		context.font = '24px Arial';
 		context.fillText(player1Score, width * 0.25, halfHeight);
 		context.fillText(player2Score, width * 0.75, halfHeight);
 	}
@@ -192,9 +192,9 @@
 			totalFramesRendered++;
 			avgFrameRate =
 				Math.round((totalFramesRendered / ((new Date().getTime() - startTime) / 1000)) * 10) / 10.0;
-			context.font = '10px Arial';
-			context.fillText(avgFrameRate + 'fps', canvas.width - 50, 10);
-			context.fillText('NTT Pong', 20, 10);
+			context.font = '18 Arial';
+			context.fillText(avgFrameRate + 'fps', canvas.width - 100, 26);
+			context.fillText('NTT Pong', 20, 26);
 		}, 1000 / FRAMES_PER_SECOND);
 
 		return () => {

@@ -2,7 +2,7 @@
 	import MediaQuery from '../../components/MediaQuery.svelte';
 	import NTT from '../../components/NTT.svelte';
 	import Cartridge from '../../components/Cartridge.svelte';
-	import Pong from './components/pong.svelte';
+	import Pong from './components/Pong.svelte';
 
 	import jinx_judge from '$lib/images/jinx/jinx_judge.webp';
 
