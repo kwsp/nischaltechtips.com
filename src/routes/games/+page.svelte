@@ -23,7 +23,8 @@
 	</div>
 
 	<ul>
-		<li><a href="/games/gameboy">Gameboy</a></li>
+		<li><a href="/games/gameboy/links_awakening">Link's Awakening (GameBoy)</a></li>
+		<li><a href="/games/gameboy/pokemon_blue">Pokemon Blue (GameBoy)</a></li>
 	</ul>
 
 	<MediaQuery query="(max-width: 768px)" let:matches>

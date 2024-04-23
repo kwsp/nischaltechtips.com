@@ -11,8 +11,8 @@
 
 	let display: HTMLCanvasElement;
 	let context: CanvasRenderingContext2D;
-	let gb;
-	let title;
+	let gb: typeof GameBoy;
+	let title = '';
 
 	function downloadROM() {
 		var http = new XMLHttpRequest();
@@ -26,7 +26,7 @@
 		http.send();
 	}
 
-	function loadROM(arraybuffer) {
+	function loadROM(arraybuffer: ArrayBuffer) {
 		// if (window.gb != undefined) {
 		// 	clearInterval(gb.interval);
 		// 	context.setTransform(1, 0, 0, 1, 0, 0);
@@ -62,11 +62,58 @@
 
 	onMount(() => {
 		context = display.getContext('2d');
-		console.log(display);
-		console.log(context);
+		if (romURL === undefined || romURL.length == 0) {
+			console.log('No romURL.');
+			return;
+		}
 		downloadROM();
 	});
+
+	const GBKeybindTable = new Map(
+		Object.entries({
+			right: 1,
+			left: 2,
+			up: 4,
+			down: 8,
+			a: 16,
+			b: 32,
+			select: 64,
+			start: 128
+		})
+	);
+
+	const UserKeybind = new Map(
+		Object.entries({
+			w: 'up',
+			s: 'down',
+			a: 'left',
+			d: 'right',
+			i: 'a',
+			l: 'b',
+			j: 'select',
+			k: 'start',
+			ArrowLeft: 'left',
+			ArrowUp: 'up',
+			ArrowDown: 'down',
+			ArrowRight: 'right'
+		})
+	);
+
+	function handleKeydown(evt: KeyboardEvent) {
+		const gbKey = UserKeybind.get(evt.key);
+		const gbKeyCode = gbKey === undefined ? undefined : GBKeybindTable.get(gbKey);
+		// console.log(`Received keydown: ${evt.key}, gbKey=${gbKey}, gbKeyCode=${gbKeyCode}`);
+		gbKeyCode !== undefined && gb.keyPressed(gbKeyCode);
+	}
+	function handleKeyup(evt: KeyboardEvent) {
+		const gbKey = UserKeybind.get(evt.key);
+		const gbKeyCode = gbKey === undefined ? undefined : GBKeybindTable.get(gbKey);
+		// console.log(`Received keyup: ${evt.key}, gbKey=${gbKey}, gbKeyCode=${gbKeyCode}`);
+		gbKeyCode !== undefined && gb.keyReleased(gbKeyCode);
+	}
 </script>
+
+<svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
 <div class="gameboy">
 	<div class="top">
@@ -163,10 +210,24 @@
 </div>
 
 <div style="display: flex; justify-content: center;">
-	<div id="title">{title}</div>
-	<div id="data"></div>
-	<div id="cartridge"></div>
-	<div id="cartridge-data"></div>
+	<div class="info-below" style="justify-content: center;">
+		<div id="title"><strong>Title</strong>: {title}</div>
+
+		<div>
+			<strong>User Keybinds</strong>
+			<ul style="margin-top: 0;">
+				{#each UserKeybind as [key, val]}
+					<li>
+						<span>{key}: {val}</span>
+					</li>
+				{/each}
+			</ul>
+		</div>
+
+		<div id="data"></div>
+		<div id="cartridge"></div>
+		<div id="cartridge-data"></div>
+	</div>
 </div>
 
 <style>
@@ -179,6 +240,10 @@
 		background-color: #d2ddcd;
 		border-radius: 0 20px 40px 0;
 		box-shadow: inset -2px -1px 5px 2px rgba(0, 0, 0, 0.25);
+	}
+
+	.info-below {
+		width: 367px;
 	}
 
 	/* .gameboy:after {

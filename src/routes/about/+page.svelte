@@ -1,8 +1,8 @@
 <script>
 	import thank_you from '$lib/files/thankyou_for_choosing-NTT.pdf';
 	import NTT from '../../components/NTT.svelte';
-	import prof_khanal from '$lib/images/prof_khanal.webp';
 
+	import prof_khanal from '$lib/images/prof_khanal.webp';
 	import nischal_happi from '$lib/images/jinx/nischal_happi.webp';
 	import jinx_1 from '$lib/images/jinx/jinx_1.webp';
 </script>
