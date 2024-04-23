@@ -2,27 +2,32 @@
 	// Adapted from https://codepen.io/cassidoo/pen/BaKrZZw
 	import { onMount } from 'svelte';
 
-	let cartridge: HTMLDivElement;
+	export let color = 'red';
+	export let changeColor = true;
+
 	const colors = ['red', 'blue', 'yellow', 'green'];
-	let colorIdx = 0;
-	let currentColor = 'red';
+	let colorIdx = colors.indexOf(color);
+
+	let cartridge: HTMLDivElement;
 
 	let timeout: number;
 	function colorswap() {
 		colorIdx = (colorIdx + 1) % colors.length;
-		currentColor = colors[colorIdx];
+		color = colors[colorIdx];
 		timeout = setTimeout(colorswap, 1000);
 	}
 
 	onMount(() => {
-		timeout = setTimeout(colorswap, 1000);
-		return () => {
-			clearTimeout(timeout);
-		};
+		if (changeColor) {
+			timeout = setTimeout(colorswap, 1000);
+			return () => {
+				clearTimeout(timeout);
+			};
+		}
 	});
 </script>
 
-<div class="cartridge {currentColor}" bind:this={cartridge}>
+<div class="cartridge {color}" bind:this={cartridge}>
 	<div class="top"></div>
 	<div class="sticker">
 		<div class="ball"></div>

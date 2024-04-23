@@ -30,7 +30,7 @@
 		margin-top: 0;
 	}
 
-	@media (max-width: 767px) {
+	@media (max-width: 768px) {
 		.jinx-roll {
 			display: none;
 		}
