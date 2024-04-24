@@ -76,7 +76,7 @@
 	nav {
 		width: 100%;
 		display: flex;
-		overflow: scroll;
+		overflow: auto;
 		justify-content: center;
 	}
 
