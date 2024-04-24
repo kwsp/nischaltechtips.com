@@ -100,9 +100,6 @@
 	.text-wrap img {
 		float: left; /* Use 'right' to float the image to the right */
 	}
-	.text-wrap img .float-right {
-		float: left; /* Use 'right' to float the image to the right */
-	}
 
 	@media (max-width: 767px) {
 		.jinx-roll {

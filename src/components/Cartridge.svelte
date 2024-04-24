@@ -51,18 +51,6 @@
 	$gray: #a6a9b7;
 	$white: #e6ecf3;
 
-	html,
-	body {
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background: $bg;
-	}
-
 	@mixin cartridgeparts($basecolor) {
 		.top {
 			position: absolute;

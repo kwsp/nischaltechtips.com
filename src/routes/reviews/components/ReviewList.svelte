@@ -96,13 +96,6 @@
 		all: unset;
 	}
 
-	.reviews-list a {
-		text-decoration: none;
-		color: #000;
-		margin-bottom: 20px;
-		display: block;
-	}
-
 	.reviews-list .review-title-product {
 		color: var(--color-theme-2);
 		font-size: large;

@@ -1239,16 +1239,6 @@
 				88px 120px #181818;
 		}
 	}
-	html,
-	body {
-		height: 100%;
-	}
-
-	body {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
 
 	#ash,
 	#pikachu {
