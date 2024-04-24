@@ -2,8 +2,7 @@
 	// Adapted from https://codepen.io/klokt-valg/pen/xNwamQ
 	import { onMount } from 'svelte';
 
-	const FRAMES_PER_SECOND = 60;
-	const FRAME_RATE_ADJUST = 30 / FRAMES_PER_SECOND;
+	const FRAME_RATE_ADJUST = 30 / 1000;
 
 	let canvas: HTMLCanvasElement, context: CanvasRenderingContext2D;
 	export let width = 800;
@@ -13,14 +12,15 @@
 	// Const values adjusted from width and height
 	let PADDLE_THICKNESS = Math.round(0.0125 * width);
 	let PADDLE_HEIGHT = Math.round(height / 6);
-	let ballSpeedX = Math.round((10 * FRAME_RATE_ADJUST * width) / 800);
-	let ballSpeedY = Math.round((4 * FRAME_RATE_ADJUST * height) / 600);
-	let ballRadius = Math.round((10 * width) / 800);
-	let COMPUTER_MOVE_SPEED = Math.round((8 * FRAME_RATE_ADJUST * width) / 800);
+	let BALL_RADIUS = Math.round((10 * width) / 800);
+
+	let ballSpeedX = (10 * FRAME_RATE_ADJUST * width) / 800;
+	let ballSpeedY = (4 * FRAME_RATE_ADJUST * height) / 600;
+	let COMPUTER_MOVE_SPEED = (8 * FRAME_RATE_ADJUST * width) / 800;
 
 	// variables updated in game
-	let ballX = 100;
-	let ballY = 100;
+	let ballX = width / 2;
+	let ballY = height / 2;
 	let player1Score = 0;
 	let player2Score = 0;
 	let paddle1Y = Math.round(0.4 * height);
@@ -80,23 +80,23 @@
 	/**
 	 * Move the computer player's paddle
 	 */
-	function computerMovement() {
+	function computerMovement(elapsed: number) {
 		const paddle2YCenter = paddle2Y + PADDLE_HEIGHT / 2;
 		if (paddle2YCenter < ballY - 35) {
-			paddle2Y = paddle2Y + COMPUTER_MOVE_SPEED;
+			paddle2Y = paddle2Y + COMPUTER_MOVE_SPEED * elapsed;
 		} else if (paddle2YCenter > ballY + 35) {
-			paddle2Y = paddle2Y - COMPUTER_MOVE_SPEED;
+			paddle2Y = paddle2Y - COMPUTER_MOVE_SPEED * elapsed;
 		}
 	}
 
-	function moveEverything() {
+	function moveEverything(elapsed: number) {
 		if (showingWinScreen) {
 			return;
 		}
-		computerMovement();
+		computerMovement(elapsed);
 
-		ballX = ballX + ballSpeedX;
-		ballY = ballY + ballSpeedY;
+		ballX = ballX + ballSpeedX * elapsed;
+		ballY = ballY + ballSpeedY * elapsed;
 
 		if (ballX < PADDLE_THICKNESS && ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
 			// hit the left paddle
@@ -181,7 +181,7 @@
 		colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 
 		// next line draws the ball
-		colorCircle(ballX, ballY, ballRadius, 'white');
+		colorCircle(ballX, ballY, BALL_RADIUS, 'white');
 
 		context.font = '24px Arial';
 		context.fillText(player1Score, width * 0.25, halfHeight);
@@ -200,8 +200,29 @@
 		context.fillRect(leftX, topY, width, height);
 	}
 
+	class RunningAverage {
+		nMax: number;
+		n: number;
+		average: number;
+		constructor(nMax: number = 50) {
+			this.nMax = nMax;
+			this.n = 0;
+			this.average = 0;
+		}
+		add(x: number) {
+			if (this.n < this.nMax) {
+				++this.n;
+			}
+			this.average = (this.average * (this.n - 1) + x) / this.n;
+			return this.average;
+		}
+		get() {
+			return this.average;
+		}
+	}
+
 	onMount(() => {
-		context = canvas.getContext('2d');
+		context = canvas.getContext('2d')!;
 
 		canvas.addEventListener('mousedown', handleMouseClick);
 		canvas.addEventListener('mousemove', handleMouseMove);
@@ -210,21 +231,41 @@
 		canvas.addEventListener('touchend', handleTouchend);
 
 		// analytics
-		let startTime = new Date().getTime();
-		let totalFramesRendered = 0;
-		let avgFrameRate = 0;
+		const avgFPS = new RunningAverage(100);
 
-		const clear = setInterval(function () {
-			moveEverything();
-			drawEverything();
-			// analytics
-			totalFramesRendered++;
-			avgFrameRate =
-				Math.round((totalFramesRendered / ((new Date().getTime() - startTime) / 1000)) * 10) / 10.0;
-			context.font = '18 Arial';
-			context.fillText(avgFrameRate + 'fps', canvas.width - 100, 26);
-			context.fillText('NTT Pong', 20, 26);
-		}, 1000 / FRAMES_PER_SECOND);
+		let previousTimestamp: number;
+		let nFrames = 0;
+		let averageFrameRate = 0;
+		const step: FrameRequestCallback = (timestamp) => {
+			if (previousTimestamp === undefined) {
+				previousTimestamp = timestamp;
+			} else {
+				const elapsed = timestamp - previousTimestamp;
+				previousTimestamp = timestamp;
+
+				moveEverything(elapsed);
+				drawEverything();
+
+				// analytics
+				if (elapsed > 0) {
+					const frameRate = 1000 / elapsed;
+					avgFPS.add(frameRate);
+					if (++nFrames > 10) {
+						// Update every 10 frames
+						nFrames = 0;
+						averageFrameRate = Math.round(avgFPS.add(frameRate));
+					}
+				}
+
+				context.font = '18 Arial';
+				context.fillText(averageFrameRate + ' fps', canvas.width - 100, 26);
+				context.fillText('NTT Pong', 20, 26);
+			}
+
+			animationFrame = requestAnimationFrame(step);
+		};
+
+		let animationFrame = requestAnimationFrame(step);
 
 		return () => {
 			canvas.removeEventListener('mousedown', handleMouseClick);
@@ -233,7 +274,7 @@
 			canvas.removeEventListener('touchmove', handleTouchmove);
 			canvas.removeEventListener('touchend', handleTouchend);
 
-			clearInterval(clear);
+			cancelAnimationFrame(animationFrame);
 		};
 	});
 </script>
