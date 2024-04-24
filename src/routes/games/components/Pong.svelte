@@ -83,9 +83,9 @@
 	function computerMovement(elapsed: number) {
 		const paddle2YCenter = paddle2Y + PADDLE_HEIGHT / 2;
 		if (paddle2YCenter < ballY - 35) {
-			paddle2Y = paddle2Y + COMPUTER_MOVE_SPEED * elapsed;
+			paddle2Y = Math.min(paddle2Y + COMPUTER_MOVE_SPEED * elapsed, canvas.height);
 		} else if (paddle2YCenter > ballY + 35) {
-			paddle2Y = paddle2Y - COMPUTER_MOVE_SPEED * elapsed;
+			paddle2Y = Math.max(paddle2Y - COMPUTER_MOVE_SPEED * elapsed, 0);
 		}
 	}
 
@@ -98,39 +98,39 @@
 		ballX = ballX + ballSpeedX * elapsed;
 		ballY = ballY + ballSpeedY * elapsed;
 
-		if (ballX < PADDLE_THICKNESS && ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
+		const inRange = (val: number, min: number, max: number) => {
+			return val > min && val < max;
+		};
+
+		if (ballX < PADDLE_THICKNESS && inRange(ballY, paddle1Y, paddle1Y + PADDLE_HEIGHT)) {
 			// hit the left paddle
 			ballSpeedX = -ballSpeedX;
-
 			const deltaY = ballY - (paddle1Y + PADDLE_HEIGHT / 2);
 			ballSpeedY = deltaY * 0.35 * FRAME_RATE_ADJUST;
+			ballX = PADDLE_THICKNESS;
 		} else if (ballX < 0) {
 			// went off
 			player2Score++; // must be BEFORE ballReset()
 			ballReset();
-		}
-
-		if (
+		} else if (
 			ballX > canvas.width - PADDLE_THICKNESS &&
-			ballY > paddle2Y &&
-			ballY < paddle2Y + PADDLE_HEIGHT
+			inRange(ballY, paddle2Y, paddle2Y + PADDLE_HEIGHT)
 		) {
 			// hit the right paddle
 			ballSpeedX = -ballSpeedX;
-
 			const deltaY = ballY - (paddle2Y + PADDLE_HEIGHT / 2);
 			ballSpeedY = deltaY * 0.35 * FRAME_RATE_ADJUST;
+			ballX = canvas.width - PADDLE_THICKNESS;
 		} else if (ballX > canvas.width) {
 			// went off
 			player1Score++; // must be BEFORE ballReset()
 			ballReset();
-		}
-
-		if (ballY < 0) {
+		} else if (ballY <= 0) {
 			// hit the top wall
+			ballY = 0;
 			ballSpeedY = -ballSpeedY;
-		}
-		if (ballY > canvas.height) {
+		} else if (ballY >= canvas.height) {
+			ballY = canvas.height - 1;
 			// hit the bottom wall
 			ballSpeedY = -ballSpeedY;
 		}
@@ -279,6 +279,6 @@
 	});
 </script>
 
-<div style="text-align:center;">
-	<canvas bind:this={canvas} id="gameCanvas" {width} {height}></canvas>
+<div>
+	<canvas bind:this={canvas} {width} {height}></canvas>
 </div>
