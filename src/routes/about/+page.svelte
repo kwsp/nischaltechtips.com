@@ -4,6 +4,7 @@
 	import Cartridge from '../../components/Cartridge.svelte';
 
 	import prof_khanal from '$lib/images/prof_khanal.webp';
+	import cat_puter from '$lib/images/cat_puter.gif';
 	import nischal_happi from '$lib/images/jinx/nischal_happi.webp';
 	import jinx_1 from '$lib/images/jinx/jinx_1.webp';
 </script>
@@ -19,6 +20,7 @@
 	<a href={thank_you}>
 		<span>Thank you for choosing Nischal Tech Tips!</span>
 		<br />
+		<img src={cat_puter} width="200" alt="Cat puter" loading="lazy" />
 		<img src={jinx_1} width="200" alt="Cat cat" loading="lazy" />
 	</a>
 
