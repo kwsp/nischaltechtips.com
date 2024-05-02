@@ -1,5 +1,4 @@
 <script>
-	import thank_you from '$lib/files/Thank_you_for_choosing_NTT.pdf';
 	import NTT from '../../components/NTT.svelte';
 	import Cartridge from '../../components/Cartridge.svelte';
 
@@ -17,7 +16,7 @@
 <div class="text-column">
 	<h1>About <NTT /></h1>
 
-	<a href={thank_you}>
+	<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
 		<span>Thank you for choosing Nischal Tech Tips!</span>
 		<br />
 		<img src={cat_puter} width="200" alt="Cat puter" loading="lazy" />
